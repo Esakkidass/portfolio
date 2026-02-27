@@ -1,7 +1,7 @@
-import { DiDotnet } from "react-icons/di";
+
 import "./Skills.scss";
 import { FaHtml5, FaCss3Alt, FaNodeJs, FaReact } from "react-icons/fa";
-import { SiDotnet, SiMysql, SiReact, SiTypescript } from "react-icons/si";
+import {SiMysql, SiReact, SiTypescript } from "react-icons/si";
 
 const skillsData = [
   { name: "HTML", level: "Advanced", color: "#ef4444", icon: <FaHtml5 /> },
