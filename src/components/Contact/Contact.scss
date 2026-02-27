@@ -1,0 +1,214 @@
+@use "../../assets/styles/variables" as vars;
+
+/* ==============================
+   SECTION
+============================== */
+
+.contact {
+  padding: 120px 40px;
+  background: vars.$dark-bg;
+}
+
+/* ==============================
+   WRAPPER
+============================== */
+
+.contact-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* ==============================
+   CARD BASE
+============================== */
+
+.contact-form-card,
+.contact-info-card {
+  position: relative;
+  background: vars.$card-bg;
+  padding: 40px;
+  border-radius: 20px;
+  z-index: 1;
+}
+
+/* ==============================
+   ANIMATED BORDER (WORKING)
+============================== */
+
+.contact-form-card::before,
+.contact-info-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 20px;
+  padding: 2px; /* Border thickness */
+
+  background: linear-gradient(
+    90deg,
+    #2563eb,
+    #6366f1,
+    #22c55e,
+    #2563eb
+  );
+  background-size: 300% 300%;
+  animation: borderMove 5s linear infinite;
+
+  /* Mask to show only border */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  pointer-events: none;
+}
+
+/* Border Animation */
+@keyframes borderMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 300% 50%;
+  }
+}
+
+/* ==============================
+   LEFT FORM
+============================== */
+
+.contact-form-card h2 {
+  margin-bottom: 30px;
+}
+
+.row {
+  display: flex;
+  gap: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  width: 100%;
+
+  label {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+
+  input,
+  textarea {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid vars.$border-color;
+    background: transparent;
+    color: vars.$text-color;
+    outline: none;
+    transition: 0.3s;
+  }
+
+  input:focus,
+  textarea:focus {
+    border-color: vars.$primary-color;
+    box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+  }
+}
+
+/* BUTTON */
+
+button {
+  margin-top: 10px;
+  padding: 14px;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #2563eb, #6366f1);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+}
+
+/* ==============================
+   RIGHT INFO
+============================== */
+
+.contact-info-card h2 {
+  margin-bottom: 30px;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+  margin-bottom: 25px;
+
+  svg {
+    font-size: 20px;
+    color: vars.$primary-color;
+  }
+
+  h4 {
+    margin-bottom: 4px;
+  }
+
+  p {
+    opacity: 0.8;
+  }
+}
+
+/* SOCIAL ICONS */
+
+.social-icons {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+
+  a {
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: vars.$dark-bg;
+    border-radius: 10px;
+    transition: 0.3s ease;
+  }
+
+  a:hover {
+    background: vars.$primary-color;
+    transform: translateY(-4px);
+  }
+
+  svg {
+    font-size: 20px;
+    color: white;
+  }
+}
+
+/* ==============================
+   RESPONSIVE
+============================== */
+
+@media (max-width: 900px) {
+  .contact-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+
+  .contact {
+    padding: 80px 20px;
+  }
+}
