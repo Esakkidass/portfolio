@@ -8,13 +8,14 @@ const Navbar = () => {
 useEffect(() => {
   const handleScroll = () => {
     const sections = ["home", "about", "skills", "projects", "contact"];
+    const scrollPosition = window.innerHeight * 0.35; // 35% of screen height
 
     sections.forEach((id) => {
       const element = document.getElementById(id);
       if (element) {
         const rect = element.getBoundingClientRect();
 
-        if (rect.top <= 150 && rect.bottom >= 150) {
+        if (rect.top <= scrollPosition && rect.bottom >= scrollPosition) {
           setActive(id);
         }
       }
@@ -22,6 +23,10 @@ useEffect(() => {
   };
 
   window.addEventListener("scroll", handleScroll);
+
+  return () => {
+    window.removeEventListener("scroll", handleScroll);
+  };
 }, []);
 
   return (
