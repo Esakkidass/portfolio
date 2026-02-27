@@ -6,29 +6,29 @@ const Navbar = () => {
   const [active, setActive] = useState("home");
 
 useEffect(() => {
-  const handleScroll = () => {
-    const sections = ["home", "about", "skills", "projects", "contact"];
-    const scrollPosition = window.innerHeight * 0.35; // 35% of screen height
+  const sections = document.querySelectorAll("section");
 
-    sections.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        const rect = element.getBoundingClientRect();
-
-        if (rect.top <= scrollPosition && rect.bottom >= scrollPosition) {
-          setActive(id);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActive(entry.target.id);
         }
-      }
-    });
-  };
+      });
+    },
+    {
+      threshold: 0.6, // 60% visible
+    }
+  );
 
-  window.addEventListener("scroll", handleScroll);
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
 
   return () => {
-    window.removeEventListener("scroll", handleScroll);
+    sections.forEach((section) => observer.unobserve(section));
   };
 }, []);
-
   return (
     <nav className="navbar">
       <div className="navbar-container">
