@@ -4,7 +4,6 @@ import EsakkiLogo from "../../assets/images/Esakkilogo.png";
 
 const Navbar = () => {
   const [active, setActive] = useState("home");
-
 useEffect(() => {
   const sections = document.querySelectorAll("section");
 
@@ -17,7 +16,7 @@ useEffect(() => {
       });
     },
     {
-      threshold: 0.6, // 60% visible
+      threshold: 0.6, // section must be 60% visible
     }
   );
 
@@ -29,6 +28,7 @@ useEffect(() => {
     sections.forEach((section) => observer.unobserve(section));
   };
 }, []);
+
   return (
     <nav className="navbar">
       <div className="navbar-container">
