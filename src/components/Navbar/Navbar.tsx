@@ -9,20 +9,32 @@ useEffect(() => {
 
   const observer = new IntersectionObserver(
     (entries) => {
+      let visibleSections: { id: string; top: number }[] = [];
+
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          setActive(entry.target.id);
+          visibleSections.push({
+            id: entry.target.id,
+            top: entry.boundingClientRect.top,
+          });
         }
       });
+
+      if (visibleSections.length > 0) {
+        // Get section closest to top
+        const closest = visibleSections.reduce((prev, current) =>
+          Math.abs(current.top) < Math.abs(prev.top) ? current : prev
+        );
+
+        setActive(closest.id);
+      }
     },
     {
-      threshold: 0.6, // section must be 60% visible
+      threshold: 0.4,
     }
   );
 
-  sections.forEach((section) => {
-    observer.observe(section);
-  });
+  sections.forEach((section) => observer.observe(section));
 
   return () => {
     sections.forEach((section) => observer.unobserve(section));
