@@ -5,28 +5,24 @@ import EsakkiLogo from "../../assets/images/Esakkilogo.png";
 const Navbar = () => {
   const [active, setActive] = useState("home");
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = ["home", "about", "skills", "projects", "contact"];
+useEffect(() => {
+  const handleScroll = () => {
+    const sections = ["home", "about", "skills", "projects", "contact"];
 
-      sections.forEach((id) => {
-        const element = document.getElementById(id);
-        if (element) {
-          const rect = element.getBoundingClientRect();
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) {
+        const rect = element.getBoundingClientRect();
 
-          if (rect.top <= 150 && rect.bottom >= 150) {
-            setActive(id);
-          }
+        if (rect.top <= 150 && rect.bottom >= 150) {
+          setActive(id);
         }
-      });
-    };
+      }
+    });
+  };
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  window.addEventListener("scroll", handleScroll);
+}, []);
 
   return (
     <nav className="navbar">
